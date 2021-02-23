@@ -90,7 +90,7 @@ function api:postStats(stats)
     {'shard_count', stats.shardCount or 0}
   };
 
-  self:request('POST', f('/bots/%i/stats', self.__bot_id), data);
+  self:_request('POST', f('/bots/%i/stats', self.__bot_id), data);
 
   return stats;
 end
@@ -100,7 +100,7 @@ function api:getStats(id)
     error("argument 'id' must be a string");
   end
 
-  local stats = self:request('GET', f('/bots/%i/stats', id));
+  local stats = self:_request('GET', f('/bots/%i/stats', id));
 
   return {serverCount = stats.server_count, shardCount = stats.shard_count, shards = stats.shards};
 end
@@ -110,7 +110,7 @@ function api:getBot(id)
     error("argument 'id' must be a string");
   end
 
-  return self:request('GET', f('/bots/%i', id));
+  return self:_request('GET', f('/bots/%i', id));
 end
 
 function api:getUser(id)
@@ -118,7 +118,7 @@ function api:getUser(id)
     error("argument 'id' must be a string");
   end
 
-  return self:request('GET', f('/users/%i', id));
+  return self:_request('GET', f('/users/%i', id));
 end
 
 function api:getBots(query)
@@ -133,7 +133,7 @@ function api:getBots(query)
     end
   end
 
-  return self:request('GET', '/bots', query);
+  return self:_request('GET', '/bots', query);
 end
 
 function api:getVotes()
@@ -141,7 +141,7 @@ function api:getVotes()
     error("Token missing from 'self.token'");
   end
 
-  return self:request('GET', '/bots/votes');
+  return self:_request('GET', '/bots/votes');
 end
 
 function api:hasVoted(id)
@@ -149,13 +149,13 @@ function api:hasVoted(id)
     error("argument 'id' must be a string");
   end
 
-  local data = self:request('GET', '/bots/check', {userId = id});
+  local data = self:_request('GET', '/bots/check', {userId = id});
 
   return not not data.voted;
 end
 
 function api:isWeekend()
-  local data = self:request('GET', '/weekend');
+  local data = self:_request('GET', '/weekend');
 
   return not not data.is_weekend;
 end
