@@ -200,7 +200,7 @@ function Api:hasVoted(id)
       error("argument 'id' must be a string");
    end
 
-   local data = self:request('GET', f('/bots/%i/check', self.__id), nil, {{'userId', id}});
+   local data = self:request('GET', f('/bots/%i/check', self.__id), nil, {userId = id});
 
    return not not data.voted;
 end
