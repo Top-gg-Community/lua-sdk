@@ -3,7 +3,6 @@ local request = http.request;
 local json = require('json');
 local f = string.format;
 local insert, concat = table.insert, table.concat;
-local encode, decode, null = json.encode, json.decode, json.null;
 local running = coroutine.running;
 
 local base_url = 'https://top.gg/api';
@@ -55,7 +54,7 @@ function Api:request(method, path, body)
    };
 
    if payloadRequired[method] then
-      body = body and encode(body) or '{}';
+      body = body and json.encode(body) or '{}';
       insert(req, {'Content-Type', JSON});
       insert(req, {'Content-Length', #body});
    end
@@ -70,7 +69,7 @@ function Api:request(method, path, body)
 end
 
 function Api:commit(method, url, req, body)
-   local success, res, msg = pcall(request, method, url, req, body);
+   local success, res, msg = assert(pcall(request, method, url, req, body));
 
    if not success then
       return nil, res;
@@ -81,13 +80,12 @@ function Api:commit(method, url, req, body)
       res[i] = nil;
    end
 
-   local data = res['content-type'] == JSON and decode(msg, 1, null) or msg;
+   local data = res['content-type'] == JSON and json.decode(msg, 1, json.null) or msg;
 
    if res.code < 300 then
+      print(f('%i - %s : %s %s', res.code, res.reason, method, url));
       return data, nil;
-   end
-
-   if type(data) == 'table' then
+   else if type(data) == 'table' then
       if data.code and data.message then
          msg = f('HTTP Error %i : %s', data.code, data.message);
       else
@@ -98,7 +96,8 @@ function Api:commit(method, url, req, body)
          msg = parseErrors({msg}, data.errors);
       end
    end
-
+end
+   print(f('%i - %s : %s %s', res.code, res.reason, method, url));
    return nil, msg;
 end
 
