@@ -81,10 +81,9 @@ function Api:commit(method, url, req, body)
    local data = res['content-type'] == JSON and decode(msg, 1, null) or msg;
    
    if res.code < 300 then
+      print(f('%i - %s : %s %s', res.code, res.reason, method, url));
       return data, nil;
-   end
-   
-   if type(data) == 'table' then
+   else if type(data) == 'table' then
       if data.code and data.message then
          msg = f('HTTP Error %i : %s', data.code, data.message);
       else
@@ -96,6 +95,7 @@ function Api:commit(method, url, req, body)
       end
    end
    
+   print(f('%i - %s : %s %s', res.code, res.reason, method, url));
    return nil, msg;
 end
 
