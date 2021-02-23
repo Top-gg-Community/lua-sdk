@@ -19,7 +19,7 @@ luvit/json
 
 ## Using the library
 Start using the API component of the library by using 
-```
+```lua
 topgg.Api:init(token, id)
 ```
 token being your top.gg token and id being your bot id.
