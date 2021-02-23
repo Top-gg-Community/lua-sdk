@@ -5,8 +5,8 @@ topgg.Api:init(
     "716061781172158464"
 );
 
-  local isWeekend = coroutine.create(function()
-    return topgg.Api:isWeekend();
+  local getUser = coroutine.create(function(id)
+    return topgg.Api:getUser(id);
   end);
   
-print(coroutine.resume(isWeekend))
+print(coroutine.resume(getUser, "544676649510371328"))

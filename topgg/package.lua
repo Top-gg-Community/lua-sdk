@@ -8,7 +8,8 @@
     homepage = "https://github.com/matthewthechickenman/topgg-lua",
     dependencies = {
       "creationix/coro-http",
-      "luvit/json"
+      "luvit/json",
+      "luvit/secure-socket"
     },
     files = {
       "**.lua",
