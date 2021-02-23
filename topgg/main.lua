@@ -1,7 +1,7 @@
 local topgg = {};
 
-topgg.Autoposter = require('modules/autoposter');
-topgg.Api = require('modules/api');
+topgg.Autoposter = require('topgg/modules/autoposter');
+topgg.Api = require('topgg/modules/api');
 
 return topgg;
 
