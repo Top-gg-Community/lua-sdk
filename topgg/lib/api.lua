@@ -60,6 +60,8 @@ function Api:request(method, path, body)
    end
 
    local data, err = self:commit(method, url, req, body);
+   
+   print(json.decode(data));
 
    if data then
       return data;
