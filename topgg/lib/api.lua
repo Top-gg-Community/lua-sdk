@@ -87,7 +87,7 @@ function Api:request(method, path, body, query)
 end
 
 function Api:commit(method, url, req, body)
-   local success, res, msg = assert(pcall(request, method, url, req, body));
+   local success, res, msg = pcall(request, method, url, req, body);
 
    if not success then
       return nil, res;
