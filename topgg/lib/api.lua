@@ -30,7 +30,7 @@ end
 
 local Api = require('class')('Api');
 
-function Api:__init(token, id)
+function Api:init(token, id)
    if type(token) ~= 'string' then
       error("argument 'token' must be a string");
    end
