@@ -1,6 +1,6 @@
 # topgg-lua
 ## Installation
-To install this library, place it in a topgg folder beside your root folder and require it by using this segment of code:
+To install this library, place it in a topgg folder beside your root folder, put the contents of /src into it and require it by using this segment of code:
 ```lua
 package.path = "./?/init.lua;" .. package.path
 local topgg = require("topgg")

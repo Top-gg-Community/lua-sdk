@@ -6,7 +6,9 @@
     license = "MIT",
     author = { name = "matthewthechickenman", email = "65732060+matthewthechickenman@users.noreply.github.com" },
     homepage = "https://github.com/topgg-lua",
-    dependencies = {},
+    dependencies = {
+      "creationix/coro-http@3.2.0"
+    },
     files = {
       "**.lua",
       "!test*"
