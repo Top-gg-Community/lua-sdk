@@ -83,7 +83,6 @@ function Api:commit(method, url, req, body)
    local data = res['content-type'] == JSON and json.decode(msg, 1, json.null) or msg;
 
    if res.code < 300 then
-      print(f('%i - %s : %s %s', res.code, res.reason, method, url));
       return data, nil;
    else if type(data) == 'table' then
       if data.code and data.message then
@@ -97,7 +96,6 @@ function Api:commit(method, url, req, body)
       end
    end
 end
-   print(f('%i - %s : %s %s', res.code, res.reason, method, url));
    return nil, msg;
 end
 

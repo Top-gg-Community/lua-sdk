@@ -5,8 +5,12 @@ topgg.Api:init(
     "716061781172158464"
 );
 
-  local getUser = coroutine.create(function(id)
-    return topgg.Api:getUser(id);
+local getUser = coroutine.create(function(id)
+    local stats = {}
+    stats.server_count = 2
+    stats.shard_id = 0
+    stats.shard_count = 1
+    print(topgg.Api:getBot("716061781172158464"));
   end);
-  
-print(coroutine.resume(getUser, "544676649510371328"))
+
+coroutine.resume(getUser, 'Animal Bot');
