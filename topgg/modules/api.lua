@@ -1,7 +1,7 @@
-local api = { __r = false }
+local Api = { __r = false }
 
 
-function api:init (token, bot_id)
+function Api:init (token, bot_id)
     if not token then
         error("[topgg-lua API] No token provided.");
     end;
@@ -19,7 +19,7 @@ function api:init (token, bot_id)
     self.bot_id = bot_id
 end;
 
-function api:getBots (query, options)
+function Api:getBots (query, options)
     if not self.__r then         
         error("[topgg-lua API] Autoposter not initialized")
     end;
@@ -29,7 +29,7 @@ function api:getBots (query, options)
     end;
 end;
 
-function api:getBot (id)
+function Api:getBot (id)
     if not self.__r then         
         error("[topgg-lua API] Autoposter not initialized")
     end;
@@ -39,7 +39,7 @@ function api:getBot (id)
 end;
 
 
-function api:checkVote (id)
+function Api:checkVote (id)
     if not self.__r then         
         error("[topgg-lua API] Autoposter not initialized")
     end;
@@ -48,7 +48,7 @@ function api:checkVote (id)
     end;
 end;
 
-function api:postStats (stats)
+function Api:postStats (stats)
     if not self.__r then         
         error("[topgg-lua API] Autoposter not initialized")
     end;
@@ -57,7 +57,7 @@ function api:postStats (stats)
     end;
 end;
 
-function api:getUser (id)
+function Api:getUser (id)
     if not self.__r then         
         error("[topgg-lua API] Autoposter not initialized")
     end;
@@ -66,4 +66,4 @@ function api:getUser (id)
     end;
 end;
 
-return api
+return Api

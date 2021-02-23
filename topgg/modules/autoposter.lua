@@ -1,6 +1,6 @@
-local autoposter = { __r = false }
+local Autoposter = { __r = false }
 
-function autoposter:init (token)
+function Autoposter:init (token)
     if type(token) ~= "string" then
         error("[topgg-lua Autoposter] Token must be a string")
     end;
@@ -8,4 +8,4 @@ function autoposter:init (token)
     self.token = token;
 end;
 
-return autoposter
+return Autoposter
