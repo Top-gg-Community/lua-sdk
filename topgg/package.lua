@@ -5,7 +5,7 @@
     tags = { "dbl", "topgg", "top.gg" },
     license = "MIT",
     author = { name = "matthewthechickenman", email = "65732060+matthewthechickenman@users.noreply.github.com" },
-    homepage = "https://github.com/topgg-lua",
+    homepage = "https://github.com/matthewthechickenman/topgg-lua",
     dependencies = {
       "creationix/coro-http@3.2.0"
     },

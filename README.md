@@ -9,3 +9,8 @@ to ensure that it ran successfully, you can run
 ```lua
 topgg.test()
 ```
+
+## Dependencies
+Install the following dependencies from the lit repository:
+```
+creationix/coro-http@3.2.0```
