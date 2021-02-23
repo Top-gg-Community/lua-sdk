@@ -1,4 +1,2 @@
 deps
-*.log
-*.json
-tests/discordia.lua
+.vscode
