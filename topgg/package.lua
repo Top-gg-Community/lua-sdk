@@ -7,7 +7,8 @@
     author = { name = "matthewthechickenman", email = "65732060+matthewthechickenman@users.noreply.github.com" },
     homepage = "https://github.com/matthewthechickenman/topgg-lua",
     dependencies = {
-      "creationix/coro-http@3.2.0"
+      "creationix/coro-http",
+      "luvit/json"
     },
     files = {
       "**.lua",

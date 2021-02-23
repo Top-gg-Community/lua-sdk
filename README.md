@@ -13,4 +13,13 @@ topgg.test()
 ## Dependencies
 Install the following dependencies from the lit repository:
 ```
-creationix/coro-http@3.2.0```
+creationix/coro-http@3.2.0
+luvit/json
+```
+
+## Using the library
+Start using the API component of the library by using 
+```
+topgg.Api:init(token, id)
+```
+token being your top.gg token and id being your bot id.
