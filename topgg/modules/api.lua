@@ -9,14 +9,14 @@ function Api:init (token, bot_id)
         error("[topgg-lua API] Token must be a string");
     end;
     if not bot_id then
-        error("[topgg-lua ID] No ID provided.");
+        error("[topgg-lua ID] No Bot ID provided.");
     end;
     if type(bot_id) ~= "string" then
-        error("[topgg-lua API] ID must be a string");
+        error("[topgg-lua API] Bot ID must be a string");
     end;
     self.__r = true;
     self.token = token;
-    self.bot_id = bot_id
+    self.__bot_id = bot_id
 end;
 
 function Api:getBots (query, options)
