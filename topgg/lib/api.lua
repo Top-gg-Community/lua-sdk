@@ -1,7 +1,7 @@
 local http = require('coro-http');
 local request = http.request;
 local json = require('json');
-local f = string.format;
+local f, gsub, byte = string.format, string.gsub, string.byte;
 local insert, concat = table.insert, table.concat;
 local running = coroutine.running;
 
@@ -41,13 +41,31 @@ function Api:init(token, id)
    self.__id = id;
 end
 
-function Api:request(method, path, body)
+local function tohex(char)
+   return f('%%%02X', byte(char));
+end
+
+local function urlencode(obj)
+   return (gsub(tostring(obj), '%W', tohex));
+end
+
+function Api:request(method, path, body, query)
    local _, main = running();
    if main then
       error('Cannot make HTTP request outside a coroutine', 2);
    end
 
    local url = base_url .. path;
+   
+   if query and next(query) then
+     for k, v in pairs(query) do
+       insert(url, #url == 1 and '?' or '&');
+       insert(url, urlencode(k));
+       insert(url, '=');
+       insert(url, urlencode(v));
+     end
+     url = concat(url);
+   end
 
    local req = {
       {'Authorization', self.token}
@@ -182,7 +200,7 @@ function Api:hasVoted(id)
       error("argument 'id' must be a string");
    end
 
-   local data = self:request('GET', f('/bots/%i/check', self.__id), {{'userId', id}});
+   local data = self:request('GET', f('/bots/%i/check', self.__id), nil, {{'userId', id}});
 
    return not not data.voted;
 end
