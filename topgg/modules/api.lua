@@ -3,6 +3,7 @@ local request = http.request;
 local running = coroutine.running;
 local f = string.format;
 local insert = table.insert;
+local json = require('json');
 local base_url = 'https://top.gg/api';
 local payloadRequired = {PUT = true, PATCH = true, POST = true};
 
