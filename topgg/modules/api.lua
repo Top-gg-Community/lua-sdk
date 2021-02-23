@@ -1,5 +1,4 @@
 local http = require('coro-http');
-local json = require('lunajson')
 local request = http.request;
 local running = coroutine.running;
 local f = string.format;
@@ -8,13 +7,17 @@ local json = require('json');
 local base_url = 'https://top.gg/api';
 local payloadRequired = {PUT = true, PATCH = true, POST = true};
 
-local api = { _r = false };
+local api = { __r = false };
 
-function api:init(token)
-  if type(token) ~= 'string' then
+function api:init(token, id)
+  if not token or type(token) ~= 'string' then
     error('[topgg-lua API] Token must be a string');
   end;
-  self._r = true;
+  if not id or type(id) ~= 'string' then
+    error('[topgg-lua API] Bot ID must be a string');
+  end;
+  self.__r = true;
+  self.__bot_id = id
   self.token = token;
 end;
 
@@ -87,7 +90,7 @@ function api:postStats(stats)
     {'shard_count', stats.shardCount or 0}
   };
 
-  self:request('POST', 'bots/stats', data);
+  self:request('POST', f('/bots/%i/stats', self.__bot_id), data);
 
   return stats;
 end
