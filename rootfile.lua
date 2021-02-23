@@ -6,7 +6,9 @@ topgg.Api:init(
 );
 
 local getUser = coroutine.create(function(id)
+    print("a")
     print(topgg.Api:hasVoted(id));
+    print("h")
   end);
 
-coroutine.resume(getUser, '265925031131873281');
+coroutine.resume(getUser, '716061781172158464');
