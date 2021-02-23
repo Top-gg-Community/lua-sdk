@@ -61,8 +61,6 @@ function Api:request(method, path, body)
 
    local data, err = self:commit(method, url, req, body);
    
-   print(json.decode(data));
-
    if data then
       return data;
    else
@@ -186,7 +184,7 @@ function Api:hasVoted(id)
       error("argument 'id' must be a string");
    end
 
-   local data = self:request('GET', f('/bots/%i/check', self.__id), {userId = id});
+   local data = self:request('GET', f('/bots/%i/check', self.__id), {{'userId', id}});
 
    return not not data.voted;
 end
