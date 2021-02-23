@@ -1,0 +1,1 @@
+--- a class with event emitters.
