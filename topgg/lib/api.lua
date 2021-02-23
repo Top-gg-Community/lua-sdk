@@ -59,6 +59,8 @@ function Api:request(method, path, body)
    
    local data, err = self:commit(method, url, req, body);
    
+   print(data);
+
    if data then
       return data;
    else
