@@ -6,7 +6,7 @@ topgg.Api:init(
 );
 
 local getUser = coroutine.create(function(server_count)
-    print(topgg.Api:postStats({server_count = server_count}));
+    print(topgg.Api:getUser("544676649510371328"));
   end);
 
 coroutine.resume(getUser, 1);

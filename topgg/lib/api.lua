@@ -117,22 +117,21 @@ end
 end
 
 function Api:postStats(stats)
-   if not stats or not stats.serverCount then
+   if not stats or (not stats.serverCount and not stats.server_count) then
       error('Server count missing');
    end
 
-   if type(stats.serverCount) ~= 'number' then
+   if type(stats.serverCount) ~= 'number' and type(stats.server_count) ~= "number"then
       error("'serverCount' must be a number");
    end
 
    stats = {
-      {'server_count', stats.serverCount},
-      {'shard_id', stats.shardId or 0},
-      {'shard_count', stats.shardCount or 0}
+      {'server_count', stats.serverCount or stats.server_count},
+      {'shard_id', stats.shardId or stats.shard_id or 0},
+      {'shard_count', stats.shardCount or stats.shard_count or 0}
    };
 
    self:request('POST', f('/bots/%i/stats', self.__id), stats);
-
    return stats;
 end
 
