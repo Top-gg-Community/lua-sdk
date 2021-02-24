@@ -76,7 +76,6 @@ function Api:request(method, path, body, query)
       insert(req, {'Content-Type', JSON});
       insert(req, {'Content-Length', #body});
    end
-
    local data, err = self:commit(method, url, req, body);
    if data then
       return data;
@@ -130,9 +129,7 @@ function Api:postStats(stats)
       shard_id = stats.shardId or stats.shard_id or 0,
       shard_count = stats.shardCount or stats.shard_count or 0
    };
-
    local _, res = self:request('POST', f('/bots/%i/stats', self.__id), __stats);
-
    return res;
 end
 
