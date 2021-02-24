@@ -125,14 +125,15 @@ function Api:postStats(stats)
       error("'serverCount' must be a number");
    end
 
-   stats = {
+   local __stats = {
       server_count = stats.serverCount or stats.server_count,
       shard_id = stats.shardId or stats.shard_id or 0,
       shard_count = stats.shardCount or stats.shard_count or 0
    };
 
-   self:request('POST', f('/bots/%i/stats', self.__id), stats);
-   return stats;
+   local _, res = self:request('POST', f('/bots/%i/stats', self.__id), __stats);
+
+   return res;
 end
 
 function Api:getStats(id)
@@ -141,12 +142,6 @@ function Api:getStats(id)
    end
 
    local stats = self:request('GET', f('/bots/%i/stats', id));
-
-   stats = {
-      serverCount = stats.server_count,
-      shardCount = stats.shard_count,
-      shards = stats.shards
-   };
 
    return stats;
 end

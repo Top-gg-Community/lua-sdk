@@ -31,10 +31,16 @@ local topgg = require('topgg');
 local Api = topgg.Api:init('YOUR-TOP.GG-TOKEN-GOES-HERE', 'YOUR-CLIENT-ID-GOES-HERE');
 
 local checkWeekend = coroutine.create(function()
-  print(Api.isWeekend());
+  print(topgg.Api:isWeekend());
 end);
 
-coroutine.resume(checkWeekend()); -- This will be `false` if it's not the weekends but it'll be `true` when it's the weekends.
+coroutine.resume(checkWeekend); -- This will print `false` if it's not the weekends but it'll be `true` when it's the weekends.
+
+local getBotStats = coroutine.create(function(id)
+  print(topgg.Api:getStats(id));
+end);
+
+coroutine.resume(getBotStats, "716061781172158464"); -- This will print a value that can be encoded into a table by using json.decode()
 ```
 
 ## Contributors
