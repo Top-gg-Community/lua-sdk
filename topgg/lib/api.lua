@@ -126,9 +126,9 @@ function Api:postStats(stats)
    end
 
    stats = {
-      {'server_count', stats.serverCount or stats.server_count},
-      {'shard_id', stats.shardId or stats.shard_id or 0},
-      {'shard_count', stats.shardCount or stats.shard_count or 0}
+      server_count = stats.serverCount or stats.server_count,
+      shard_id = stats.shardId or stats.shard_id or 0,
+      shard_count = stats.shardCount or stats.shard_count or 0
    };
 
    self:request('POST', f('/bots/%i/stats', self.__id), stats);
