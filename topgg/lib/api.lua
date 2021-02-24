@@ -78,7 +78,6 @@ function Api:request(method, path, body, query)
    end
 
    local data, err = self:commit(method, url, req, body);
-   
    if data then
       return data;
    else

@@ -1,12 +1,12 @@
 package.path = "./?/init.lua" .. package.path
 local topgg = require("topgg")
 topgg.Api:init(
-    "token", 
-    "id"
+    "", 
+    "753688662449061919"
 );
 
-local getUser = coroutine.create(function(id)
-    print(topgg.Api:hasVoted(id));
+local getUser = coroutine.create(function(server_count)
+    print(topgg.Api:postStats({server_count = server_count}));
   end);
 
-coroutine.resume(getUser, '265925031131873281');
+coroutine.resume(getUser, 1);
