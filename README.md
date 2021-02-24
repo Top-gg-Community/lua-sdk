@@ -15,6 +15,7 @@ Install the following dependencies from the lit repository:
 ```
 creationix/coro-http@3.2.0
 luvit/json
+luvit/secure-socket
 ```
 
 ## Using the library
@@ -38,5 +39,3 @@ coroutine.resume(checkWeekend()); -- This will be `false` if it's not the weeken
 
 ## Contributors
 [Voltrex](https://github.com/VoltrexMaster)<br>[Matthew.](https://github.com/matthewthechickenman)<br>[MILLION](https://github.com/Million900o)
-
-token being your top.gg token and id being your bot id.
