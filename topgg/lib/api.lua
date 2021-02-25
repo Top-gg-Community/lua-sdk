@@ -120,7 +120,7 @@ function Api:postStats(stats)
       error('Server count missing');
    end
 
-   if type(stats.serverCount) ~= 'number' and type(stats.server_count) ~= "number"then
+   if type(stats.serverCount) ~= 'number' and type(stats.server_count) ~= 'number' then
       error("'serverCount' must be a number");
    end
 
@@ -133,7 +133,7 @@ function Api:postStats(stats)
      __stats.shard_count = stats.shard_count or stats.shardCount
    end
 
-   local _, res = self:request('POST', '/bots/stats', __stats);
+   local _, res = self:request('POST', f('/bots/%s/stats', self.__id), __stats);
    return res;
 end
 
@@ -142,7 +142,7 @@ function Api:getStats(id)
       error("argument 'id' must be a string");
    end
 
-   local stats = self:request('GET', f('/bots/%i/stats', id));
+   local stats = self:request('GET', f('/bots/%s/stats', id));
 
    return stats;
 end
@@ -152,7 +152,7 @@ function Api:getBot(id)
       error("argument 'id' must be a string");
    end
 
-   return self:request('GET', f('/bots/%i', id));
+   return self:request('GET', f('/bots/%s', id));
 end
 
 function Api:getBots(query)
@@ -164,7 +164,7 @@ function Api:getBots(query)
       if type(query.search) == 'table' then
          local search = {};
          for k, v in pairs(query.search) do
-            insert(search, f('%i: %s', k, v));
+            insert(search, f('%s: %s', k, v));
          end
          query.search = search;
       end
@@ -178,7 +178,7 @@ function Api:getUser(id)
       error("argument 'id' must be a string");
    end
 
-   return self:request('GET', f('/users/%i', id));
+   return self:request('GET', f('/users/%s', id));
 end
 
 function Api:getVotes()
@@ -186,14 +186,14 @@ function Api:getVotes()
       error('Missing token');
    end
 
-   return self:request('GET', f('/bots/%i/votes', self.__id));
+   return self:request('GET', f('/bots/%s/votes', self.__id));
 end
 
 function Api:hasVoted(id)
    if type(id) ~= 'string' then
       error("argument 'id' must be a string");
    end
-   local data = self:request('GET', f('/bots/%i/check?userId=%i', self.__id, id));
+   local data = self:request('GET', f('/bots/%s/check?userId=%s', self.__id, id));
 
    return not not data.voted;
 end
