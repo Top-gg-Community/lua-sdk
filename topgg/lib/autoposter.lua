@@ -10,11 +10,11 @@ function AutoPoster:init(client)
     error("argument 'client' must be a client instance");
   end
 
-  self.__post = Api:init(client._token, client._user.id):postStats;
+  Api:init(client._token, client._user.id)
 
   setInterval(function()
     local poster = coroutine.create(function()
-    self.__post({serverCount = client._guilds.__len(), shardCount = client._shard_count});
+    Api:postStats({serverCount = client._guilds.__len(), shardCount = client._shard_count});
     self:emit('posted');
   end);
     coroutine.resume(poster);
