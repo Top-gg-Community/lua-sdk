@@ -36,7 +36,6 @@ function Api:init(token, id)
    if type(id) ~= "string" then
     error("argument 'id' must be a string");
    end
-
    self.token = token;
    self.__id = id;
 end

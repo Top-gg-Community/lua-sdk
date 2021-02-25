@@ -3,11 +3,11 @@ local topgg = require("topgg")
 local json = require("json")
 topgg.Api:init(
     "",
-    "753688662449061919"
+    "647256366280474626"
 );
 
 local postStats = coroutine.create(function()
-  local res = topgg.Api:postStats({serverCount = 1})
+  local res = topgg.Api:postStats({serverCount = 78, shardCount = 1, shardId = 0})
   print(res);
 end);
 
