@@ -5,16 +5,20 @@ local EventEmitter = require('EventEmitter');
 
 local AutoPoster = require('class')('AutoPoster', EventEmitter);
 
-function AutoPoster:init(client)
-  if not client or not client._user or not client._user.id or not client._token then
-    error("argument 'client' must be a client instance");
+function AutoPoster:init(apiToken, client)
+  if not client or not client.user or not client.user.id or not client.guilds  then
+    error("argument 'client' must be a discordia client instance");
   end
 
-  Api:init(client._token, client._user.id)
+  Api:init(apiToken, client.user.id)
 
   setInterval(function()
     local poster = coroutine.create(function()
-    Api:postStats({serverCount = client._guilds.__len(), shardCount = client._shard_count});
+    local stats = {serverCount = client.guilds.__len()}
+    if client.totalShardCount then
+        stats.shardCount = client.totalShardCount
+    end
+    Api:postStats(stats);
     self:emit('posted');
   end);
     coroutine.resume(poster);
