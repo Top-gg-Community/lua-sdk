@@ -77,8 +77,6 @@ function Api:request(method, path, body, query)
       insert(req, {'Content-Length', #body});
    end
 
-   print(body);
-
    local data, err = self:commit(method, url, req, body);
    if data then
       return data;
