@@ -129,10 +129,14 @@ function Api:postStats(stats)
 
    local __stats = {
       server_count = stats.serverCount or stats.server_count,
-      shard_id = stats.shardId or stats.shard_id or 0,
-      shard_count = stats.shardCount or stats.shard_count or 0
    };
-   local _, res = self:request('POST', f('/bots/%i/stats', self.__id), __stats);
+
+   if (stats.shardId or stats.shard_id) and (stats.shardCount or stats.shard_count) then
+     __stats.shard_id = stats.shard_id or stats.shardId
+     __stats.shard_count = stats.shard_count or stats.shardCount
+   end
+
+   local _, res = self:request('POST', f('/bots/stats'), __stats);
    return res;
 end
 
