@@ -29,15 +29,11 @@ end
 
 local Api = require('class')('Api');
 
-function Api:init(token, id)
+function Api:init(token)
    if type(token) ~= 'string' then
       error("argument 'token' must be a string");
    end
-   if type(id) ~= "string" then
-    error("argument 'id' must be a string");
-   end
    self.token = token;
-   self.__id = id;
 end
 
 local function tohex(char)
@@ -133,7 +129,7 @@ function Api:postStats(stats)
      __stats.shard_count = stats.shard_count or stats.shardCount
    end
 
-   local _, res = self:request('POST', f('/bots/%s/stats', self.__id), __stats);
+   local _, res = self:request('POST', '/bots/stats', __stats);
    return res;
 end
 
@@ -186,14 +182,14 @@ function Api:getVotes()
       error('Missing token');
    end
 
-   return self:request('GET', f('/bots/%s/votes', self.__id));
+   return self:request('GET', '/bots/votes');
 end
 
 function Api:hasVoted(id)
    if type(id) ~= 'string' then
       error("argument 'id' must be a string");
    end
-   local data = self:request('GET', f('/bots/%s/check?userId=%s', self.__id, id));
+   local data = self:request('GET', f('/bots/check?userId=%s', id));
 
    return not not data.voted;
 end
