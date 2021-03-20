@@ -4,10 +4,7 @@ local json = require('json');
 local f, gsub, byte = string.format, string.gsub, string.byte;
 local insert, concat = table.insert, table.concat;
 local running = coroutine.running;
-
 local base_url = 'https://top.gg/api';
-
-local JSON = 'application/json';
 local payloadRequired = {PUT = true, PATCH = true, POST = true};
 
 local function parseErrors(ret, errors, key)
@@ -68,7 +65,7 @@ function Api:request(method, path, body, query)
 
    if payloadRequired[method] then
       body = body and json.encode(body) or '{}';
-      insert(req, {'Content-Type', JSON});
+      insert(req, {'Content-Type', 'application/json'});
       insert(req, {'Content-Length', #body});
    end
 
@@ -92,7 +89,7 @@ function Api:commit(method, url, req, body)
       res[i] = nil;
    end
 
-   local data = res['content-type'] == JSON and json.decode(msg, 1, json.null) or msg;
+   local data = res['content-type'] == 'application/json' and json.decode(msg, 1, json.null) or msg;
 
    if res.code < 300 then
       return data, nil;
